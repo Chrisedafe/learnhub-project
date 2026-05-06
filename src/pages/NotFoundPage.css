@@ -1,0 +1,22 @@
+.not-found-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.nf-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 80px 24px;
+  max-width: 400px;
+}
+
+.nf-glow { display: none; }
+.nf-code { font-size: 5rem; font-weight: 800; color: var(--border); line-height: 1; margin-bottom: 8px; }
+.nf-content h1 { font-size: 1.3rem; color: var(--text-primary); }
+.nf-content p { font-size: 0.9rem; color: var(--text-muted); }
+.nf-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }

@@ -1,0 +1,199 @@
+/* ─── Fonts ──────────────────────────────────────────────────────────────── */
+/* Syne: display/headings — geometric, distinct
+   Inter: body — neutral, highly legible at small sizes                       */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+:root {
+  /* Palette — 3 primary + neutrals only */
+  --white:       #ffffff;
+  --accent:      #ffffff;   /* primary interactive — white on black */
+  --accent-dim:  #a0a0a0;
+
+  /* Neutrals — 8px grid steps */
+  --bg:          #0a0a0a;   /* page background */
+  --bg-card:     #141414;   /* card / panel surface */
+  --bg-hover:    #1c1c1c;   /* hover lift */
+  --bg-input:    #111111;   /* form inputs */
+
+  /* Text scale */
+  --text-primary:   #f1f1f1;
+  --text-secondary: #b0b0b0;
+  --text-muted:     #6e6e6e;
+
+  /* Borders */
+  --border:       #2a2a2a;
+  --border-light: #1f1f1f;
+
+  /* Semantic — difficulty + status */
+  --green:      #4ade80;
+  --green-bg:   #0a1f12;
+  --green-border:#052e16;
+  --gold:       #fbbf24;
+  --gold-bg:    #141100;
+  --gold-border:#1c1a00;
+  --red:        #f87171;
+  --red-bg:     #1a0808;
+  --red-border: #2d0f0f;
+
+  /* Category accent colors — muted to suit dark bg */
+  --cat-design-color:    #a78bfa;
+  --cat-design-bg:       #1a1230;
+  --cat-design-border:   #2e1f4a;
+
+  --cat-dev-color:       #60a5fa;
+  --cat-dev-bg:          #0f1e30;
+  --cat-dev-border:      #1a3050;
+
+  --cat-business-color:  #fbbf24;
+  --cat-business-bg:     #141100;
+  --cat-business-border: #2a2000;
+
+  --cat-marketing-color: #f472b6;
+  --cat-marketing-bg:    #200d18;
+  --cat-marketing-border:#3a1428;
+
+  --cat-data-color:      #34d399;
+  --cat-data-bg:         #071a12;
+  --cat-data-border:     #0f2d1e;
+
+  /* Spacing grid — 4px base, 8px standard unit */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;   /* headings */
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;  /* body */
+
+  /* Misc */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --nav-h:     56px;
+  --transition: 0.12s ease;
+  --max-w:     1180px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
+img { max-width: 100%; display: block; }
+
+/* ─── Headings — display font ─────────────────────────────────────────────── */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+/* ─── Layout helpers ─────────────────────────────────────────────────────── */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.page-wrapper {
+  min-height: calc(100vh - var(--nav-h));
+  padding-top: var(--nav-h);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ─── Focus ──────────────────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 2px; border-radius: 2px; }
+
+/* ─── Animation ──────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Tags ───────────────────────────────────────────────────────────────── */
+/* Base tag — all tags share this */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--bg-card);
+  white-space: nowrap;
+}
+
+/* Difficulty badges — color signals skill level */
+.tag.badge-beginner     { color: var(--green); background: var(--green-bg); border-color: var(--green-border); }
+.tag.badge-intermediate { color: var(--gold);  background: var(--gold-bg);  border-color: var(--gold-border);  }
+.tag.badge-advanced     { color: var(--red);   background: var(--red-bg);   border-color: var(--red-border);   }
+
+/* Category tags — each subject has its own accent */
+.tag.cat-design         { color: var(--cat-design-color);   background: var(--cat-design-bg);   border-color: var(--cat-design-border);   }
+.tag.cat-development    { color: var(--cat-dev-color);      background: var(--cat-dev-bg);      border-color: var(--cat-dev-border);      }
+.tag.cat-business       { color: var(--cat-business-color); background: var(--cat-business-bg); border-color: var(--cat-business-border); }
+.tag.cat-marketing      { color: var(--cat-marketing-color);background: var(--cat-marketing-bg);border-color: var(--cat-marketing-border);}
+.tag.cat-data-science   { color: var(--cat-data-color);     background: var(--cat-data-bg);     border-color: var(--cat-data-border);     }
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);  /* 8px 16px */
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  transition: all var(--transition);
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Primary — solid white */
+.btn-primary                { background: var(--white); color: #000; border-color: var(--white); }
+.btn-primary:hover          { background: #e8e8e8; border-color: #e8e8e8; }
+.btn-primary:active         { background: #d0d0d0; border-color: #d0d0d0; transform: translateY(1px); }
+
+/* Secondary — outlined */
+.btn-secondary              { background: transparent; color: var(--text-primary); border-color: var(--border); }
+.btn-secondary:hover        { background: var(--bg-hover); border-color: #404040; }
+.btn-secondary:active       { background: #242424; transform: translateY(1px); }
+
+/* Ghost — text only */
+.btn-ghost                  { background: transparent; color: var(--text-secondary); border-color: transparent; }
+.btn-ghost:hover            { color: var(--text-primary); background: var(--bg-hover); }
+.btn-ghost:active           { background: #242424; transform: translateY(1px); }
+
+.btn-lg { padding: var(--space-3) var(--space-6); font-size: 0.95rem; }  /* 12px 24px */
+.btn-sm { padding: var(--space-1) var(--space-3); font-size: 0.8rem;  }  /* 4px 12px */
+
+.btn:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.btn:focus-visible { outline: 2px solid var(--accent-dim); outline-offset: 2px; }
